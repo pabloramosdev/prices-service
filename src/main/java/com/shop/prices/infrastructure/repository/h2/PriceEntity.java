@@ -1,6 +1,9 @@
 package com.shop.prices.infrastructure.repository.h2;
 
+import com.shop.prices.domain.Brand;
+import com.shop.prices.domain.Currency;
 import com.shop.prices.domain.Price;
+import com.shop.prices.domain.ProductId;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -103,8 +106,8 @@ public class PriceEntity {
 
     Price toDomain() {
         return Price.builder()
-                .id(id).brandId(brandId).productId(productId).price(price).priceList(priceList).priority(priority)
-                .currency(currency).startDate(startDate).endDate(endDate).build();
+                .id(id).brand(Brand.findById(brandId)).productId(new ProductId(productId)).price(price).priceList(priceList).priority(priority)
+                .currency(Currency.valueOf(currency)).startDate(startDate).endDate(endDate).build();
     }
 
 }

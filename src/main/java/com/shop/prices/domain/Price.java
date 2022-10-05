@@ -2,22 +2,22 @@ package com.shop.prices.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @Builder
 @AllArgsConstructor
 public class Price {
     private Long id;
-    private Integer brandId;
-    private Integer productId;
+    private Brand brand;
+    private ProductId productId;
     private Integer priceList;
     private Integer priority;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private BigDecimal price;
-    private String currency;
+    private Currency currency;
 }
