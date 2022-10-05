@@ -1,6 +1,8 @@
 package com.shop.prices.application;
 
+import com.shop.prices.domain.Brand;
 import com.shop.prices.domain.Price;
+import com.shop.prices.domain.ProductId;
 import com.shop.prices.domain.service.PriceService;
 import com.shop.prices.infrastructure.rest.PriceResponse;
 
@@ -15,9 +17,9 @@ public class QueryPriceByPriority {
     }
 
     public PriceResponse findPriceByPriority(Integer brandId, Integer productId, LocalDateTime applicationDate) {
-        Price price = priceService.findPriceWithMaxPriority(brandId, productId, applicationDate);
-        return PriceResponse.builder().price(price.getPrice()).productId(price.getProductId())
-                .brandId(price.getBrandId()).priceList(price.getPriceList()).applicationDate(applicationDate).build();
+        Price price = priceService.findPriceWithMaxPriority(Brand.findById(brandId), new ProductId(productId), applicationDate);
+        return PriceResponse.builder().price(price.getPrice()).productId(price.getProductId().getId())
+                .brandId(price.getBrand().getId()).priceList(price.getPriceList()).applicationDate(applicationDate).build();
     }
 
 }

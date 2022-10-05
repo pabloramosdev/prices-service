@@ -1,6 +1,8 @@
 package com.shop.prices.infrastructure.repository.h2;
 
+import com.shop.prices.domain.Brand;
 import com.shop.prices.domain.Price;
+import com.shop.prices.domain.ProductId;
 import com.shop.prices.domain.repository.PriceRepository;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +20,8 @@ public class H2PriceRepository implements PriceRepository {
     }
 
     @Override
-    public List<Price> findPriceBetweenDates(Integer brandId, Integer productId, LocalDateTime applicationDate) {
-        return springDataH2PriceRepository.findPriceBetweenDates(brandId, productId, applicationDate)
+    public List<Price> findPriceBetweenDates(Brand brand, ProductId productId, LocalDateTime applicationDate) {
+        return springDataH2PriceRepository.findPriceBetweenDates(brand.getId(), productId.getId(), applicationDate)
                 .stream()
                 .map(PriceEntity::toDomain)
                 .collect(Collectors.toList());
