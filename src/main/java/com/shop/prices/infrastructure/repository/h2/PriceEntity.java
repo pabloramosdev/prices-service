@@ -106,7 +106,7 @@ public class PriceEntity {
 
     Price toDomain() {
         return Price.builder()
-                .id(id).brand(Brand.findById(brandId)).productId(new ProductId(productId)).price(price).priceList(priceList).priority(priority)
+                .id(id).brand(Brand.create(brandId)).productId(new ProductId(productId)).price(price).priceList(priceList).priority(priority)
                 .currency(Currency.valueOf(currency)).startDate(startDate).endDate(endDate).build();
     }
 
