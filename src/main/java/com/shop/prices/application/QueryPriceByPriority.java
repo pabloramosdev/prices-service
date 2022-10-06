@@ -17,7 +17,7 @@ public class QueryPriceByPriority {
     }
 
     public PriceResponse findPriceByPriority(Integer brandId, Integer productId, LocalDateTime applicationDate) {
-        Price price = priceService.findPriceWithMaxPriority(Brand.findById(brandId), new ProductId(productId), applicationDate);
+        Price price = priceService.findPriceWithMaxPriority(Brand.create(brandId), new ProductId(productId), applicationDate);
         return PriceResponse.builder().price(price.getPrice()).productId(price.getProductId().getId())
                 .brandId(price.getBrand().getId()).priceList(price.getPriceList()).applicationDate(applicationDate).build();
     }

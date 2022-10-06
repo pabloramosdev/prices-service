@@ -12,7 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static com.shop.prices.domain.Brand.ZARA;
 import static com.shop.prices.utils.PriceUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 

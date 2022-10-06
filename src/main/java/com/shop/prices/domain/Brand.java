@@ -1,19 +1,27 @@
 package com.shop.prices.domain;
 
-public enum Brand {
-    ZARA(1, "ZARA"),
-    PULL_AND_BEAR(2, "Pull&Bear"),
-    MASSIMO_DUTTI(3, "Massimo Dutti"),
-    BERSHKA(4, "Bershka"),
-    STRADIVARIUS(5, "Stradivarius"),
-    OYSHO(6, "Oysho"),
-    ZARA_HOME(7, "Zara Home"),
-    UTERQUE(8, "Uterqüe");
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+public class Brand {
+    private static final Map<Integer, String> brandMap = new HashMap<>();
+
+    static {
+        brandMap.put(1, "ZARA");
+        brandMap.put(2, "Pull&Bear");
+        brandMap.put(3, "Massimo Dutti");
+        brandMap.put(4, "Bershka");
+        brandMap.put(5, "Stradivarius");
+        brandMap.put(6, "Oysho");
+        brandMap.put(7, "Zara Home");
+        brandMap.put(8, "Uterqüe");
+    }
 
     private final Integer id;
     private final String name;
 
-    Brand(Integer id, String name) {
+    private Brand(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -26,34 +34,16 @@ public enum Brand {
         return name;
     }
 
-    public static Brand findById(Integer id) {
-        Brand brand;
-        switch (id) {
-            case 2:
-                brand = PULL_AND_BEAR;
-                break;
-            case 3:
-                brand = MASSIMO_DUTTI;
-                break;
-            case 4:
-                brand = BERSHKA;
-                break;
-            case 5:
-                brand = STRADIVARIUS;
-                break;
-            case 6:
-                brand = OYSHO;
-                break;
-            case 7:
-                brand = ZARA_HOME;
-                break;
-            case 8:
-                brand = UTERQUE;
-                break;
-            default:
-                brand = ZARA;
-        }
-        return brand;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Brand brand = (Brand) o;
+        return Objects.equals(id, brand.id) && Objects.equals(name, brand.name);
     }
-    
+
+    public static Brand create(Integer brandId) {
+        String name = brandMap.get(brandId);
+        return new Brand(brandId, name);
+    }
 }
